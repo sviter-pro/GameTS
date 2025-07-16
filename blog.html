@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+     <title>Заказать взлом для игры TownShip</title>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+     <!-- Firebase SDK -->
+     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+     <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+     <style>
+          /* Основные стили для карточек */
+          .product-card {
+               background: white;
+               border-radius: 10px;
+               box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+               padding: 25px;
+               margin-bottom: 30px;
+               height: 100%;
+               transition: transform 0.3s ease;
+          }
+          
+          .product-card:hover {
+               transform: translateY(-5px);
+               box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+          }
+          
+          .product-title {
+               font-size: 22px;
+               font-weight: 700;
+               margin-bottom: 15px;
+               color: #2c3e50;
+          }
+          
+          .product-price {
+               font-size: 28px;
+               font-weight: 700;
+               color: #3498db;
+               margin-bottom: 5px;
+          }
+          
+          .product-price-rub {
+               font-size: 18px;
+               color: #7f8c8d;
+               margin-bottom: 20px;
+          }
+          
+          .product-features {
+               list-style: none;
+               padding: 0;
+               margin-bottom: 25px;
+          }
+          
+          .product-features li {
+               padding: 5px 0;
+               display: flex;
+               align-items: center;
+          }
+          
+          .product-features i {
+               color: #2ecc71;
+               margin-right: 10px;
+               font-size: 18px;
+          }
+          
+          .order-btn {
+               display: block;
+               width: 100%;
+               padding: 12px;
+               background: #3498db;
+               color: white;
+               text-align: center;
+               border-radius: 5px;
+               text-decoration: none;
+               font-weight: 600;
+               transition: background 0.3s;
+          }
+          
+          .order-btn:hover {
+               background: #2980b9;
+               color: white;
+          }
+          
+          .section-header {
+               text-align: center;
+               margin-bottom: 50px;
+               padding-bottom: 15px;
+               position: relative;
+          }
+          
+          .section-header h1 {
+               font-weight: 700;
+               color: #2c3e50;
+          }
+          
+          .section-header:after {
+               content: '';
+               position: absolute;
+               bottom: 0;
+               left: 50%;
+               transform: translateX(-50%);
+               width: 80px;
+               height: 3px;
+               background: #3498db;
+          }
+          
+          /* Стили для сообщений о загрузке */
+          .loading-message {
+               text-align: center;
+               padding: 30px;
+               font-size: 18px;
+               color: #7f8c8d;
+          }
+          
+          .error-message {
+               text-align: center;
+               padding: 30px;
+               font-size: 18px;
+               color: #e74c3c;
+          }
+     </style>
+</head>
+<body>
+
+     <!-- Навигационное меню -->
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container">
+               <a class="navbar-brand" href="#">
+                    <i class="fas fa-fish"></i> TownShip Взлом
+               </a>
+               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+               </button>
+               <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                         <li class="nav-item">
+                              <a class="nav-link" href="index.html">Главная</a>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link" href="contact.html">Помощь</a>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link" href="https://t.me/+9UjkSMlIMPA4MGIy">Telegram</a>
+                         </li>
+						 <li class="nav-item">
+                              <a class="nav-link" href="https://t.me/reviews_township">Отзывы</a>
+                         </li>
+                    </ul>
+               </div>
+          </div>
+     </nav>
+
+     <!-- Основной контент -->
+     <div class="container py-5">
+          <!-- Секция с монетами -->
+          <div class="row">
+               <div class="col-12">
+                    <div class="section-header">
+                         <h1>Монеты</h1>
+                    </div>
+               </div>
+               <div class="row" id="coins-container">
+                    <div class="loading-message">Загрузка монет...</div>
+               </div>
+          </div>
+          
+          <!-- Секция с звездами -->
+          <div class="row mt-5">
+               <div class="col-12">
+                    <div class="section-header">
+                         <h1>Банкноты</h1>
+                    </div>
+               </div>
+               <div class="row" id="bank-container">
+                    <div class="loading-message">Загрузка банкнот...</div>
+               </div>
+          </div>
+
+     </div>
+
+     <!-- Футер -->
+     <footer class="bg-dark text-white py-4">
+          <div class="container text-center">
+               <p>Другие наши взломы:</p>
+               <a href="https://sviter-pro.github.io/GameFI/" class="btn btn-outline-light">
+                    Family Island
+               </a>
+			   <a href="https://sviter-pro.github.io/FameFD/" class="btn btn-outline-light">
+                    FishDom
+               </a>
+			   <a href="https://sviter-pro.github.io/GameRM/" class="btn btn-outline-light">
+                    RoyalMatch
+               </a>
+          </div>
+     </footer>
+
+     <!-- Скрипты -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+     <script>
+          // Конфигурация Firebase (ЗАМЕНИТЕ НА СВОЮ!)
+          const firebaseConfig = {
+                apiKey: "AIzaSyAeL_donbsrMtreNe1HTyXbpo8rko4VqBc",
+				authDomain: "basegamesorders.firebaseapp.com",
+				databaseURL: "https://basegamesorders-default-rtdb.firebaseio.com",
+				projectId: "basegamesorders",
+				storageBucket: "basegamesorders.firebasestorage.app",
+				messagingSenderId: "469058322867",
+				appId: "1:469058322867:web:2a0260076bb68ef88d4bc6",
+				measurementId: "G-H44VJ1JH8X"
+          };
+
+          // Инициализация Firebase
+          try {
+               firebase.initializeApp(firebaseConfig);
+               console.log("Firebase initialized successfully");
+          } catch (error) {
+               console.error("Firebase initialization error:", error);
+          }
+
+          const database = firebase.database();
+
+          // Функция для создания HTML карточки товара
+          async function createProductCard(product, category, index) {
+               if (!product) return '';
+               
+               const exchangeRate = 82; // Фиксированный курс для примера
+               const dollarAmount = parseFloat(product.sum.replace('$', '').replace(/\s/g, '').trim());
+               const rubleAmount = Math.round(dollarAmount * exchangeRate);
+               
+               // Генерируем ссылку с параметрами
+               const productType = encodeURIComponent(category);
+               const productId = index + 1; // ID становится 1, 2 или 3
+               const orderLink = `order.html?type=${productType}&id=${productId}`;
+               
+               return `
+               <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                         <h3 class="product-title">${product.name || 'Товар'}</h3>
+                         <div class="product-price">$${dollarAmount || '0'}</div>
+                         <div class="product-price-rub">≈ ${rubleAmount} руб</div>
+                         <ul class="product-features">
+                              <li><i class="fas fa-check-circle"></i> ${product.subname || 'Вы получите:'}</li>
+                              <li><i class="fas fa-check-circle"></i> ${product.opis || 'Описание'}</li>
+                         </ul>
+                         <a href="${orderLink}" class="order-btn">Заказать</a>
+                    </div>
+               </div>
+               `;
+          }
+
+          // Функция загрузки данных
+          async function loadProducts() {
+               try {
+                    console.log("Загрузка данных из Firebase...");
+                    
+                    const snapshot = await database.ref('TownShip/Orders').once('value');
+                    const data = snapshot.val();
+                    
+                    if (!data) {
+                         throw new Error("Данные не получены из Firebase");
+                    }
+                    
+                    console.log("Данные получены:", data);
+                    
+                    // Обработка монет
+                    const coinsContainer = document.getElementById('coins-container');
+                    if (data['Монеты']) {
+                         coinsContainer.innerHTML = '';
+                         let index = 0;
+                         
+                         for (const key in data['Монеты']) {
+                              const cardHtml = await createProductCard(data['Монеты'][key], 'Монеты', index);
+                              coinsContainer.innerHTML += cardHtml;
+                              index++;
+                         }
+                    }
+                    
+                    // Обработка банкнот
+                    const rubiesContainer = document.getElementById('bank-container');
+                    if (data['Банкноты']) {
+                         rubiesContainer.innerHTML = '';
+                         let index = 0;
+                         
+                         for (const key in data['Банкноты']) {
+                              const cardHtml = await createProductCard(data['Банкноты'][key], 'Банкноты', index);
+                              rubiesContainer.innerHTML += cardHtml;
+                              index++;
+                         }
+                    }
+
+                    
+               } catch (error) {
+                    console.error("Ошибка загрузки:", error);
+                    document.getElementById('coins-container').innerHTML = 
+                         '<div class="col-12 error-message">Ошибка загрузки данных</div>';
+                    document.getElementById('bank-container').innerHTML = 
+                         '<div class="col-12 error-message">Ошибка загрузки данных</div>';
+               }
+          }
+
+          // Загрузка данных при готовности DOM
+          document.addEventListener('DOMContentLoaded', function() {
+               if (typeof firebase === 'undefined') {
+                    console.error("Firebase не загружен");
+                    return;
+               }
+               
+               loadProducts();
+          });
+
+          // Функция для генерации ID заказа (используется на странице order.html)
+          function generateOrderId() {
+               const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+               let result = '';
+               for (let i = 0; i < 6; i++) {
+                    result += chars.charAt(Math.floor(Math.random() * chars.length));
+               }
+               return 'ORD-' + result;
+          }
+     </script>
+</body>
+</html>
